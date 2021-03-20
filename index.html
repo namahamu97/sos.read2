@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width>, initial-scale=1.0">
+    <link rel="stylesheet" href="stylelook.css">
+    <title>Document</title>
+</head>
+
+<header>
+    <div class="hamburger-menu">
+        <input type="checkbox" id="menu-btn-check">
+        <label for="menu-btn-check" class="menu-btn"><span></span></label>
+        <!--ここからメニュー-->
+        <div class="menu-content">
+            <ul>
+                <li>
+                    <a href="">基本情報</a>
+                </li>
+                <li>
+                    <a href="">医療関係</a>
+                </li>
+                <li>
+                    <a href="">連絡先一覧</a>
+                </li>
+                <li>
+                    <a href="">コミュニケーション</a>
+                </li>
+                <li>
+                    <a href="">困ったときは</a>
+                </li>
+            </ul>
+        </div>
+        <!--ここまでメニュー-->
+    </div>
+</header>
+
+<body>
+    <div class="kao">
+        <img src="twittericon13.jpg" alt="" class="face">
+    </div>
+    <div class="container">
+        <p class="a">名前</p>
+        <p id="namae"></p>
+        <p class="a">(
+        <p id="hurigana"></p>)</p>
+    </div>
+    <div class="container">
+        <p class="a">ニックネーム</p>
+        <p id="nikkune-mu"></p>
+    </div>
+    <h1>基本</h1>
+    <div class="container">
+        <p class="a">性別</p><p id="seibetu"></p>
+    </div>
+    <div class="container">
+        <p class="a">生年月日</p><p id="nen"></p>
+        <p>年</p><p id="gatu"></p>
+        <p>月</p><p id="niti"></p>
+        <p>日</p>
+    </div>
+    <div class="container">
+        <p class="a">障がい・疾病名</p><p id="syougai"></p>
+    </div>
+    <p class="b">住所</p>
+    <div class="container">
+        <p class="a">郵便番号</p><p id="yuubinbangou"></p>
+    </div>
+    <div class="container">
+        <p class="a">住所</p><p id="zyuusyo"></p>
+    </div>
+    <div class="container">
+        <p class="a">電話番号</p><p id="dennwabanngou"></p>
+    </div>
+    <p class="b">主な生活場所</p>
+    <div class="container">
+        <p class="a">施設名</p><p id="sisetu"></p>
+    </div>
+    <div class="container">
+        <p class="a">郵便番号</p><p id="yuubinbangou1"></p>
+    </div>
+    <div class="container">
+        <p class="a">住所</p><p id="zyuusyo1"></p>
+    </div>
+    <div class="container">
+        <p class="a">電話番号</p><p id="dennwabanngou1"></p>
+    </div>
+    
+    <h1>手帳など</h1>
+    <p class="b">療育手帳</p>
+    <div class="container">
+        <p id="rank"></p>
+        <p class="a">　　　　番号</p><p id="ryouiku"></p>
+    </div>
+    <p class="b">身障手帳</p>
+    <div class="container">
+        <p id="syu"></p>
+        <p class="a">種</p><p id="kyuu1"></p>
+        <p class="a">級　　　　番号</p><p id="sinntai"></p>
+    </div>
+    <p class="b">精神手帳</p>
+    <div class="container">
+        <p id="kyuu2"></p>
+        <p class="a">級　　　　　　　番号</p><p id="seisinn"></p>
+    </div>
+    <p class="b">年金手帳</p>
+    <div class="container">
+        <p class="a">番号</p><p id="nennkinn"></p>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </script>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+                 https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyDzyp1CZPzhelBJQErgxa91Qh6MElKAWxo",
+                authDomain: "sos-file-6b29b.firebaseapp.com",
+                projectId: "sos-file-6b29b",
+                storageBucket: "sos-file-6b29b.appspot.com",
+                messagingSenderId: "1026900784152",
+                appId: "1:1026900784152:web:f796185fd249ae9b853f6d"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+        </script>
+    <script>
+        var db = firebase.firestore();
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                onSnapshot((doc) => {
+                    //console.log(querySnapshot)
+                    let namae = ''
+                    const data = doc.data()
+                    namae += '<p>' + data.名前 + '<p>'
+                    $("#namae").html(namae)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                onSnapshot((doc) => {
+                    let hurigana = ''
+                    const data = doc.data()
+                    hurigana += '<p>' + data.ふりがな + '<p>'
+                    $("#hurigana").html(hurigana)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                onSnapshot((doc) => {
+                    //console.log(querySnapshot)
+                    let nikku = ''
+                    const data = doc.data()
+                    nikku += '<p>' + data.ニックネーム + '<p>'
+                    $("#nikkune-mu").html(nikku)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                onSnapshot((doc) => {
+                    //console.log(querySnapshot)
+                    let seibetu = ''
+                    const data = doc.data()
+                    seibetu += '<p>' + data.性別 + '<p>'
+                    $("#seibetu").html(seibetu)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                onSnapshot((doc) => {
+                    //console.log(querySnapshot)
+                    let nen = ''
+                    const data = doc.data()
+                    nen += '<p>' + data.年 + '<p>'
+                    $("#nen").html(nen)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let gatu = ''
+                        const data = doc.data()
+                        gatu += '<p>' + data.月 + '<p>'
+                        $("#gatu").html(gatu)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let niti = ''
+                        const data = doc.data()
+                        niti += '<p>' + data.日 + '<p>'
+                        $("#niti").html(niti)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let syou = ''
+                        const data = doc.data()
+                        syou += '<p>' + data.障がい疾病名 + '<p>'
+                        $("#syougai").html(syou)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let yuubin = ''
+                        const data = doc.data()
+                        yuubin += '<p>' + data.郵便番号自 + '<p>'
+                        $("#yuubinbangou").html(yuubin)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let zyuusyo = ''
+                        const data = doc.data()
+                        zyuusyo += '<p>' + data.住所自 + '<p>'
+                        $("#zyuusyo").html(zyuusyo)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let denwa = ''
+                        const data = doc.data()
+                        denwa += '<p>' + data.電話番号自 + '<p>'
+                        $("#dennwabanngou").html(denwa)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let yuubin1 = ''
+                        const data = doc.data()
+                        yuubin1 += '<p>' + data.郵便番号施 + '<p>'
+                        $("#yuubinbangou1").html(yuubin1)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let sisetu = ''
+                        const data = doc.data()
+                        sisetu += '<p>' + data.施設名 + '<p>'
+                        $("#sisetu").html(sisetu)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let zyuusyo1 = ''
+                        const data = doc.data()
+                        zyuusyo1 += '<p>' + data.住所施 + '<p>'
+                        $("#zyuusyo1").html(zyuusyo1)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let denwa1 = ''
+                        const data = doc.data()
+                        denwa1 += '<p>' + data.電話番号施 + '<p>'
+                        $("#dennwabanngou1").html(denwa1)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let rank = ''
+                        const data = doc.data()
+                        rank += '<p>' + data.療育級 + '<p>'
+                        $("#rank").html(rank)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let ryouiku = ''
+                        const data = doc.data()
+                        ryouiku += '<p>' + data.療育番号 + '<p>'
+                        $("#ryouiku").html(ryouiku)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let syu = ''
+                        const data = doc.data()
+                        syu += '<p>' + data.身障種 + '<p>'
+                        $("#syu").html(syu)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let kyuu1 = ''
+                        const data = doc.data()
+                        kyuu1 += '<p>' + data.身障級 + '<p>'
+                        $("#kyuu1").html(kyuu1)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let sinsyou = ''
+                        const data = doc.data()
+                        sinsyou += '<p>' + data.身障番号 + '<p>'
+                        $("#sinntai").html(sinsyou)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let kyuu2 = ''
+                        const data = doc.data()
+                        kyuu2 += '<p>' + data.精神級 + '<p>'
+                        $("#kyuu2").html(kyuu2)
+            });
+
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let seisinn = ''
+                        const data = doc.data()
+                        seisinn += '<p>' + data.精神番号 + '<p>'
+                        $("#seisinn").html(seisinn)
+            });     
+            
+            db.collection("sosfile").doc("BDU2GlJvHz2qqi1lCUjo").
+                    onSnapshot((doc) => {
+                        //console.log(querySnapshot)
+                        let nenkin = ''
+                        const data = doc.data()
+                        nenkin += '<p>' + data.年金番号 + '<p>'
+                        $("#nennkinn").html(nenkin)
+            })
+    </script>
+
+    
+</body>
+
+</html>
